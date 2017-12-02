@@ -4,25 +4,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="12dp"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
     tools:context="com.example.jigsaw.cookbook.SearchActivity">
 
 
     <SearchView
         android:id="@+id/enter_ingredient_search_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
+        android:layout_margin="12dp"
         android:queryHint="Enter the Ingredients"/>
 
-    <Button
-        android:id="@+id/parse_search_string_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Parse String"
-        android:layout_marginTop="12dp"
-        android:layout_gravity="center"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recipes_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 
 
