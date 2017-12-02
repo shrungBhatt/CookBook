@@ -1,8 +1,6 @@
 package com.example.jigsaw.cookbook;
 
-/**
- * Created by jigsaw on 2/12/17.
- */
+
 
 public class RecipeData {
 

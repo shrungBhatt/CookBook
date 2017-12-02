@@ -1,6 +1,5 @@
 package com.example.jigsaw.cookbook;
 
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -59,6 +58,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        //RecyclerView to display the recipes fetched from the database.
         mRecipeRecyclerView = findViewById(R.id.recipes_recyclerView);
         mRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
@@ -66,11 +66,13 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    //Class used to define the viewHolder of the recyclerView.
     private class RecipeHolder extends RecyclerView.ViewHolder{
 
         private TextView mRecipeNameTextView;
         private TextView mRecipeIngredientsTextView;
 
+        //Constructor called in the adapter class.
         RecipeHolder(LayoutInflater layoutInflater, ViewGroup container) {
             super(layoutInflater.
                     inflate(R.layout.recipe_list_item,container,false));
@@ -80,14 +82,16 @@ public class SearchActivity extends AppCompatActivity {
             mRecipeIngredientsTextView = itemView.findViewById(R.id.ingredients_list_item_textView);
         }
 
+        //Method used in adapter to bind the data in the viewHolder.
         void recipeViewHolder(RecipeData recipeData){
-
             mRecipeData = recipeData;
             mRecipeNameTextView.setText(mRecipeData.getRecipeName());
             mRecipeIngredientsTextView.setText(mRecipeData.getRecipeIngredients());
         }
     }
 
+
+    //Adapter class used for recyclerView.
     private class RecipeAdapter extends RecyclerView.Adapter<RecipeHolder>{
 
         private List<RecipeData> mRecipes;
@@ -115,6 +119,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    //method using Volley to fetch the data from the database.
     private void fetchRecipes(final String query){
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/recipe.php",
@@ -141,15 +146,14 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 return params;
             }
-
-
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
 
     }
 
+
+    //Method used to parse the JSON that we got in the response from the server.
     private List<RecipeData> getRecipeDatas(String result){
 
         List<RecipeData> recipeDatas = new ArrayList<>();
