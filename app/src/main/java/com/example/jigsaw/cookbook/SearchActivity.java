@@ -1,12 +1,16 @@
 package com.example.jigsaw.cookbook;
 
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -22,7 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -31,15 +37,30 @@ public class SearchActivity extends AppCompatActivity {
     private List<String> mIngredientsList;
     private RecyclerView mRecipeRecyclerView;
     private RecipeData mRecipeData;
+    private List<RecipeData> mRecipeDatasRedundant;
+    private List<RecipeData> mRecipeDatas;
+    private EditText mSearchEditText;
+    private ImageButton mSearchImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        mIngredientSearchView = findViewById(R.id.enter_ingredient_search_view);
+//        mIngredientSearchView = findViewById(R.id.enter_ingredient_search_view);
+
+        mSearchEditText = findViewById(R.id.search_ingredients_edit_text);
+
+        mSearchImageButton = findViewById(R.id.search_ingredients_image_button);
+        mSearchImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fetchRecipes(mSearchEditText.getText().toString());
+            }
+        });
 
         mRecipeRecyclerView = findViewById(R.id.recipes_recyclerView);
+        mRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
 
     }
@@ -50,7 +71,7 @@ public class SearchActivity extends AppCompatActivity {
         private TextView mRecipeNameTextView;
         private TextView mRecipeIngredientsTextView;
 
-        public RecipeHolder(LayoutInflater layoutInflater,ViewGroup container) {
+        RecipeHolder(LayoutInflater layoutInflater, ViewGroup container) {
             super(layoutInflater.
                     inflate(R.layout.recipe_list_item,container,false));
 
@@ -59,15 +80,11 @@ public class SearchActivity extends AppCompatActivity {
             mRecipeIngredientsTextView = itemView.findViewById(R.id.ingredients_list_item_textView);
         }
 
-        void bindViewHolder(RecipeData recipeData){
+        void recipeViewHolder(RecipeData recipeData){
 
             mRecipeData = recipeData;
             mRecipeNameTextView.setText(mRecipeData.getRecipeName());
             mRecipeIngredientsTextView.setText(mRecipeData.getRecipeIngredients());
-
-
-
-
         }
     }
 
@@ -88,7 +105,7 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(RecipeHolder holder, int position) {
             RecipeData recipeData = mRecipes.get(position);
-            holder.bindViewHolder(recipeData);
+            holder.recipeViewHolder(recipeData);
         }
 
         @Override
@@ -98,12 +115,14 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-    private void fetchRecipes(String query){
+    private void fetchRecipes(final String query){
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                "http://ersnexus.esy.es/Recipe.php",
+                "http://ersnexus.esy.es/recipe.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        mRecipeDatasRedundant = getRecipeDatas(response);
+                        mRecipeRecyclerView.setAdapter(new RecipeAdapter(mRecipeDatasRedundant));
 
                     }
                 },
@@ -113,6 +132,15 @@ public class SearchActivity extends AppCompatActivity {
                         Log.e(TAG,"Got an error: "+error.toString());
                     }
                 }){
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                if (query != null) {
+                    params.put("ingredient", query);
+                }
+                return params;
+            }
 
 
         };
@@ -135,6 +163,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 RecipeData recipeData = new RecipeData();
 
+                recipeData.setId(Integer.valueOf(jsonObject.getString("id")));
                 recipeData.setRecipeName(jsonObject.getString("recipe"));
                 recipeData.setRecipeIngredients(jsonObject.getString("ingredient"));
 
