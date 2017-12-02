@@ -3,6 +3,7 @@ package com.example.jigsaw.cookbook;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +73,9 @@ public class SearchActivity extends AppCompatActivity {
 
     private class RecipeAdapter extends RecyclerView.Adapter<RecipeHolder>{
 
-        private ArrayList<RecipeData> mRecipes;
+        private List<RecipeData> mRecipes;
 
-        RecipeAdapter(ArrayList<RecipeData> recipes){
+        RecipeAdapter(List<RecipeData> recipes){
             mRecipes = recipes;
         }
 
@@ -94,7 +99,8 @@ public class SearchActivity extends AppCompatActivity {
 
 
     private void fetchRecipes(String query){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, query,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://ersnexus.esy.es/Recipe.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -104,7 +110,7 @@ public class SearchActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.e(TAG,"Got an error: "+error.toString());
                     }
                 }){
 
@@ -114,6 +120,33 @@ public class SearchActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
 
+    }
+
+    private List<RecipeData> getRecipeDatas(String result){
+
+        List<RecipeData> recipeDatas = new ArrayList<>();
+
+        try{
+
+            JSONArray jsonArray = new JSONArray(result);
+
+            for(int i = 0;i<jsonArray.length();i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                RecipeData recipeData = new RecipeData();
+
+                recipeData.setRecipeName(jsonObject.getString("recipe"));
+                recipeData.setRecipeIngredients(jsonObject.getString("ingredient"));
+
+                recipeDatas.add(recipeData);
+
+            }
+
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+
+        return recipeDatas;
     }
 
 }
