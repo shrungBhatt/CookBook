@@ -61,8 +61,6 @@ public class SearchActivity extends AppCompatActivity {
         //RecyclerView to display the recipes fetched from the database.
         mRecipeRecyclerView = findViewById(R.id.recipes_recyclerView);
         mRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-
     }
 
 
@@ -121,14 +119,18 @@ public class SearchActivity extends AppCompatActivity {
 
     //method using Volley to fetch the data from the database.
     private void fetchRecipes(final String query){
+
+        //Building the request to be send to the server.
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/recipe.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        //Parsing the JSON string that we received in the response of the request.
                         mRecipeDatasRedundant = getRecipeDatas(response);
+                        //Setting the recyclerView with the ArrayList that we obtained by parsing
+                        //the response string.
                         mRecipeRecyclerView.setAdapter(new RecipeAdapter(mRecipeDatasRedundant));
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -138,6 +140,7 @@ public class SearchActivity extends AppCompatActivity {
                     }
                 }){
 
+            //This interface is called to set the value of parameters in the server-side script
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -147,6 +150,8 @@ public class SearchActivity extends AppCompatActivity {
                 return params;
             }
         };
+
+        //Add the Request that we generated in a queue which executes the requests.
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
 
@@ -157,11 +162,9 @@ public class SearchActivity extends AppCompatActivity {
     private List<RecipeData> getRecipeDatas(String result){
 
         List<RecipeData> recipeDatas = new ArrayList<>();
-
         try{
-
             JSONArray jsonArray = new JSONArray(result);
-
+            //Loop used for storing the data in the ArrayList, by parsing the response string.
             for(int i = 0;i<jsonArray.length();i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -172,13 +175,10 @@ public class SearchActivity extends AppCompatActivity {
                 recipeData.setRecipeIngredients(jsonObject.getString("ingredient"));
 
                 recipeDatas.add(recipeData);
-
             }
-
         }catch(JSONException e){
             e.printStackTrace();
         }
-
         return recipeDatas;
     }
 
