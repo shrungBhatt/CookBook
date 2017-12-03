@@ -7,11 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -20,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,14 +37,15 @@ import java.util.Map;
 public class SearchActivity extends AppCompatActivity {
 
     private static final String TAG = "SearchActivity";
-    private SearchView mIngredientSearchView;
+//    private SearchView mIngredientSearchView;
     private List<String> mIngredientsList;
     private RecyclerView mRecipeRecyclerView;
     private RecipeData mRecipeData;
     private List<RecipeData> mRecipeDatasRedundant;
     private List<RecipeData> mRecipeDatas;
-    private EditText mSearchEditText;
-    private ImageButton mSearchImageButton;
+    private ProgressWheel mProgressWheel;
+//    private EditText mSearchEditText;
+//    private ImageButton mSearchImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,21 +60,48 @@ public class SearchActivity extends AppCompatActivity {
 
 //        mIngredientSearchView = findViewById(R.id.enter_ingredient_search_view);
 
-        mSearchEditText = findViewById(R.id.search_ingredients_edit_text);
-
-        mSearchImageButton = findViewById(R.id.search_ingredients_image_button);
-        mSearchImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fetchRecipes(mSearchEditText.getText().toString());
-            }
-        });
+//        mSearchEditText = findViewById(R.id.search_ingredients_edit_text);
+//
+//        mSearchImageButton = findViewById(R.id.search_ingredients_image_button);
+//        mSearchImageButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                fetchRecipes(mSearchEditText.getText().toString());
+//            }
+//        });
 
         //RecyclerView to display the recipes fetched from the database.
         mRecipeRecyclerView = findViewById(R.id.recipes_recyclerView);
         //Setting the layout of the recyclerView as linear.
         mRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        mRecipeRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
+        mRecipeRecyclerView.
+                addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
+//        mProgressWheel = findViewById(R.id.progress_wheel);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                fetchRecipes(s);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                fetchRecipes(s);
+                return true;
+            }
+        });
+        return true;
     }
 
 
@@ -137,6 +169,7 @@ public class SearchActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         //Parsing the JSON string that we received in the response of the request.
                         mRecipeDatasRedundant = getRecipeDatas(response);
+
                         //Setting the recyclerView with the ArrayList that we obtained by parsing
                         //the response string.
                         mRecipeRecyclerView.setAdapter(new RecipeAdapter(mRecipeDatasRedundant));
@@ -190,5 +223,7 @@ public class SearchActivity extends AppCompatActivity {
         }
         return recipeDatas;
     }
+
+
 
 }
