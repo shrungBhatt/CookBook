@@ -60,6 +60,7 @@ public class SearchActivity extends AppCompatActivity {
 
         //RecyclerView to display the recipes fetched from the database.
         mRecipeRecyclerView = findViewById(R.id.recipes_recyclerView);
+        //Setting the layout of the recyclerView as linear.
         mRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 

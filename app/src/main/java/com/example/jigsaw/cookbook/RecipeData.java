@@ -1,6 +1,7 @@
 package com.example.jigsaw.cookbook;
 
-
+//This is the model class used to manage the data of the Recipe.
+//It consists of getters and setters.
 
 public class RecipeData {
 
