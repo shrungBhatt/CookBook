@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,12 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        //This is used to change the color of the app name in the action bar.
+        getSupportActionBar().
+                setTitle(Html.fromHtml("<font color=\"#f8a300\">" +
+                        getString(R.string.app_name) + "</font>"));
+
+
 //        mIngredientSearchView = findViewById(R.id.enter_ingredient_search_view);
 
         mSearchEditText = findViewById(R.id.search_ingredients_edit_text);
@@ -62,11 +69,12 @@ public class SearchActivity extends AppCompatActivity {
         mRecipeRecyclerView = findViewById(R.id.recipes_recyclerView);
         //Setting the layout of the recyclerView as linear.
         mRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        mRecipeRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
     }
 
 
     //Class used to define the viewHolder of the recyclerView.
-    private class RecipeHolder extends RecyclerView.ViewHolder{
+    private class RecipeHolder extends RecyclerView.ViewHolder {
 
         private TextView mRecipeNameTextView;
         private TextView mRecipeIngredientsTextView;
@@ -74,7 +82,7 @@ public class SearchActivity extends AppCompatActivity {
         //Constructor called in the adapter class.
         RecipeHolder(LayoutInflater layoutInflater, ViewGroup container) {
             super(layoutInflater.
-                    inflate(R.layout.recipe_list_item,container,false));
+                    inflate(R.layout.recipe_list_item, container, false));
 
             mRecipeNameTextView = itemView.findViewById(R.id.recipe_name_list_item_textView);
 
@@ -82,7 +90,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         //Method used in adapter to bind the data in the viewHolder.
-        void recipeViewHolder(RecipeData recipeData){
+        void recipeViewHolder(RecipeData recipeData) {
             mRecipeData = recipeData;
             mRecipeNameTextView.setText(mRecipeData.getRecipeName());
             mRecipeIngredientsTextView.setText(mRecipeData.getRecipeIngredients());
@@ -91,18 +99,18 @@ public class SearchActivity extends AppCompatActivity {
 
 
     //Adapter class used for recyclerView.
-    private class RecipeAdapter extends RecyclerView.Adapter<RecipeHolder>{
+    private class RecipeAdapter extends RecyclerView.Adapter<RecipeHolder> {
 
         private List<RecipeData> mRecipes;
 
-        RecipeAdapter(List<RecipeData> recipes){
+        RecipeAdapter(List<RecipeData> recipes) {
             mRecipes = recipes;
         }
 
         @Override
         public RecipeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-            return new RecipeHolder(inflater,parent);
+            return new RecipeHolder(inflater, parent);
         }
 
         @Override
@@ -119,7 +127,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
     //method using Volley to fetch the data from the database.
-    private void fetchRecipes(final String query){
+    private void fetchRecipes(final String query) {
 
         //Building the request to be send to the server.
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
@@ -137,9 +145,9 @@ public class SearchActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG,"Got an error: "+error.toString());
+                        Log.e(TAG, "Got an error: " + error.toString());
                     }
-                }){
+                }) {
 
             //This interface is called to set the value of parameters in the server-side script
             @Override
@@ -160,13 +168,13 @@ public class SearchActivity extends AppCompatActivity {
 
 
     //Method used to parse the JSON that we got in the response from the server.
-    private List<RecipeData> getRecipeDatas(String result){
+    private List<RecipeData> getRecipeDatas(String result) {
 
         List<RecipeData> recipeDatas = new ArrayList<>();
-        try{
+        try {
             JSONArray jsonArray = new JSONArray(result);
             //Loop used for storing the data in the ArrayList, by parsing the response string.
-            for(int i = 0;i<jsonArray.length();i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 RecipeData recipeData = new RecipeData();
@@ -177,7 +185,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 recipeDatas.add(recipeData);
             }
-        }catch(JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return recipeDatas;

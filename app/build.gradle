@@ -28,4 +28,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     implementation 'com.android.support:recyclerview-v7:27.0.1'
+    compile 'org.lucasr.twowayview:twowayview:0.1.4'
+
 }
