@@ -53,9 +53,9 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         //This is used to change the color of the app name in the action bar.
-        getSupportActionBar().
-                setTitle(Html.fromHtml("<font color=\"#f8a300\">" +
-                        getString(R.string.app_name) + "</font>"));
+//        getSupportActionBar().
+//                setTitle(Html.fromHtml("<font color=\"#f8a300\">" +
+//                        getString(R.string.app_name) + "</font>"));
 
 
 //        mIngredientSearchView = findViewById(R.id.enter_ingredient_search_view);
@@ -77,6 +77,8 @@ public class SearchActivity extends AppCompatActivity {
         mRecipeRecyclerView.
                 addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
 //        mProgressWheel = findViewById(R.id.progress_wheel);
+
+        fetchRecipes(",");
     }
 
 
