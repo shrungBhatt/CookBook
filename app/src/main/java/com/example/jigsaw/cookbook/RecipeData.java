@@ -8,6 +8,7 @@ public class RecipeData {
     private int mId;
     private String mRecipeName;
     private String mRecipeIngredients;
+    private String mImageUrl;
 
 
     public int getId() {
@@ -32,5 +33,13 @@ public class RecipeData {
 
     public void setRecipeIngredients(String mRecipeIngredients) {
         this.mRecipeIngredients = mRecipeIngredients;
+    }
+
+    public String getmImageUrl() {
+        return mImageUrl;
+    }
+
+    public void setmImageUrl(String imageUrl) {
+        this.mImageUrl = imageUrl;
     }
 }

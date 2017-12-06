@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.support.v7.widget.SearchView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -24,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pnikosis.materialishprogress.ProgressWheel;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +39,7 @@ import java.util.Map;
 public class SearchActivity extends AppCompatActivity {
 
     private static final String TAG = "SearchActivity";
-//    private SearchView mIngredientSearchView;
+    //    private SearchView mIngredientSearchView;
     private List<String> mIngredientsList;
     private RecyclerView mRecipeRecyclerView;
     private RecipeData mRecipeData;
@@ -112,6 +114,7 @@ public class SearchActivity extends AppCompatActivity {
 
         private TextView mRecipeNameTextView;
         private TextView mRecipeIngredientsTextView;
+        private ImageView mRecipeImageView;
 
         //Constructor called in the adapter class.
         RecipeHolder(LayoutInflater layoutInflater, ViewGroup container) {
@@ -121,6 +124,8 @@ public class SearchActivity extends AppCompatActivity {
             mRecipeNameTextView = itemView.findViewById(R.id.recipe_name_list_item_textView);
 
             mRecipeIngredientsTextView = itemView.findViewById(R.id.ingredients_list_item_textView);
+
+            mRecipeImageView = itemView.findViewById(R.id.recipe_image_image_view);
         }
 
         //Method used in adapter to bind the data in the viewHolder.
@@ -128,6 +133,11 @@ public class SearchActivity extends AppCompatActivity {
             mRecipeData = recipeData;
             mRecipeNameTextView.setText(mRecipeData.getRecipeName());
             mRecipeIngredientsTextView.setText(mRecipeData.getRecipeIngredients());
+        }
+
+        void bindRecipeImage(RecipeData recipeData) {
+            Picasso.with(getApplicationContext()).load(recipeData.getmImageUrl()).
+                    into(mRecipeImageView);
         }
     }
 
@@ -151,6 +161,7 @@ public class SearchActivity extends AppCompatActivity {
         public void onBindViewHolder(RecipeHolder holder, int position) {
             RecipeData recipeData = mRecipes.get(position);
             holder.recipeViewHolder(recipeData);
+            holder.bindRecipeImage(recipeData);
         }
 
         @Override
@@ -217,6 +228,7 @@ public class SearchActivity extends AppCompatActivity {
                 recipeData.setId(Integer.valueOf(jsonObject.getString("id")));
                 recipeData.setRecipeName(jsonObject.getString("recipe"));
                 recipeData.setRecipeIngredients(jsonObject.getString("ingredient"));
+                recipeData.setmImageUrl(jsonObject.getString("image_url"));
 
                 recipeDatas.add(recipeData);
             }
@@ -225,7 +237,6 @@ public class SearchActivity extends AppCompatActivity {
         }
         return recipeDatas;
     }
-
 
 
 }
