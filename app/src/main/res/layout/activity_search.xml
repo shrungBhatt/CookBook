@@ -8,7 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentBottom="true"
-    android:padding="4dp"
     tools:context="com.example.jigsaw.cookbook.SearchActivity">
 
 </android.support.v7.widget.RecyclerView>

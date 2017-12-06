@@ -135,6 +135,8 @@ public class SearchActivity extends AppCompatActivity {
             mRecipeIngredientsTextView.setText(mRecipeData.getRecipeIngredients());
         }
 
+        //Method used in adapter to download the image from the server and load it into the
+        //recycler view using Picasso API.
         void bindRecipeImage(RecipeData recipeData) {
             Picasso.with(getApplicationContext()).load(recipeData.getmImageUrl()).
                     into(mRecipeImageView);
