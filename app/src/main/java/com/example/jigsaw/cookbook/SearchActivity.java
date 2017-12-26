@@ -138,8 +138,9 @@ public class SearchActivity extends AppCompatActivity {
         //Method used in adapter to download the image from the server and load it into the
         //recycler view using Picasso API.
         void bindRecipeImage(RecipeData recipeData) {
-            Picasso.with(getApplicationContext()).load(recipeData.getmImageUrl()).
-                    into(mRecipeImageView);
+            Picasso.with(getApplicationContext()).load(recipeData.getmImageUrl())
+                    .transform(new RoundedTransformation(50,4))
+                    .into(mRecipeImageView);
         }
     }
 
