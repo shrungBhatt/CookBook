@@ -1,5 +1,6 @@
 package com.example.jigsaw.cookbook;
 
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -74,10 +75,13 @@ public class SearchActivity extends AppCompatActivity {
 
         //RecyclerView to display the recipes fetched from the database.
         mRecipeRecyclerView = findViewById(R.id.recipes_recyclerView);
+
         //Setting the layout of the recyclerView as linear.
         mRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-//        mRecipeRecyclerView.
-//                addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
+        if (!(Build.VERSION.SDK_INT == Build.VERSION_CODES.M)) {
+            mRecipeRecyclerView.
+                    addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
+        }
 //        mProgressWheel = findViewById(R.id.progress_wheel);
 
         fetchRecipes(",");
@@ -139,7 +143,7 @@ public class SearchActivity extends AppCompatActivity {
         //recycler view using Picasso API.
         void bindRecipeImage(RecipeData recipeData) {
             Picasso.with(getApplicationContext()).load(recipeData.getmImageUrl())
-                    .transform(new RoundedTransformation(50,4))
+                    .transform(new RoundedTransformation(50, 4))
                     .into(mRecipeImageView);
         }
     }
