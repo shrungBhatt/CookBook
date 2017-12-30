@@ -76,8 +76,8 @@ public class SearchActivity extends AppCompatActivity {
         mRecipeRecyclerView = findViewById(R.id.recipes_recyclerView);
         //Setting the layout of the recyclerView as linear.
         mRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        mRecipeRecyclerView.
-                addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
+//        mRecipeRecyclerView.
+//                addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
 //        mProgressWheel = findViewById(R.id.progress_wheel);
 
         fetchRecipes(",");
