@@ -1,4 +1,4 @@
-package com.example.jigsaw.cookbook;
+package Utility;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.jigsaw.cookbook.R;
 
 
 public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {

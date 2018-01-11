@@ -3,11 +3,19 @@ package com.example.jigsaw.cookbook;
 //This is the model class used to manage the data of the Recipe.
 //It consists of getters and setters.
 
-public class RecipeData {
+import com.google.gson.annotations.SerializedName;
 
+import Model.BaseModel;
+
+public class RecipeData extends BaseModel{
+
+    @SerializedName("id")
     private int mId;
+    @SerializedName("recipe")
     private String mRecipeName;
+    @SerializedName("ingredients")
     private String mRecipeIngredients;
+    @SerializedName("image_url")
     private String mImageUrl;
 
 

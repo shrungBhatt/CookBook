@@ -5,16 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.support.v7.widget.SearchView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,7 +32,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SearchActivity extends AppCompatActivity {
+import Model.BaseModel;
+import Utility.RoundedTransformation;
+import Utility.SimpleDividerItemDecoration;
+
+public class SearchActivity extends BaseActivity {
 
     private static final String TAG = "SearchActivity";
     //    private SearchView mIngredientSearchView;
@@ -112,71 +111,30 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void handleSuccessData(BaseModel resModel) {
 
-    //Class used to define the viewHolder of the recyclerView.
-    private class RecipeHolder extends RecyclerView.ViewHolder {
-
-        private TextView mRecipeNameTextView;
-        private TextView mRecipeIngredientsTextView;
-        private ImageView mRecipeImageView;
-
-        //Constructor called in the adapter class.
-        RecipeHolder(LayoutInflater layoutInflater, ViewGroup container) {
-            super(layoutInflater.
-                    inflate(R.layout.recipe_list_item, container, false));
-
-            mRecipeNameTextView = itemView.findViewById(R.id.recipe_name_list_item_textView);
-
-            mRecipeIngredientsTextView = itemView.findViewById(R.id.ingredients_list_item_textView);
-
-            mRecipeImageView = itemView.findViewById(R.id.recipe_image_image_view);
-        }
-
-        //Method used in adapter to bind the data in the viewHolder.
-        void recipeViewHolder(RecipeData recipeData) {
-            mRecipeData = recipeData;
-            mRecipeNameTextView.setText(mRecipeData.getRecipeName());
-            mRecipeIngredientsTextView.setText(mRecipeData.getRecipeIngredients());
-        }
-
-        //Method used in adapter to download the image from the server and load it into the
-        //recycler view using Picasso API.
-        void bindRecipeImage(RecipeData recipeData) {
-            Picasso.with(getApplicationContext()).load(recipeData.getmImageUrl())
-                    .transform(new RoundedTransformation(50, 4))
-                    .into(mRecipeImageView);
-        }
     }
 
+    @Override
+    public void handleZeroData(BaseModel reqModel) {
 
-    //Adapter class used for recyclerView.
-    private class RecipeAdapter extends RecyclerView.Adapter<RecipeHolder> {
-
-        private List<RecipeData> mRecipes;
-
-        RecipeAdapter(List<RecipeData> recipes) {
-            mRecipes = recipes;
-        }
-
-        @Override
-        public RecipeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-            return new RecipeHolder(inflater, parent);
-        }
-
-        @Override
-        public void onBindViewHolder(RecipeHolder holder, int position) {
-            RecipeData recipeData = mRecipes.get(position);
-            holder.recipeViewHolder(recipeData);
-            holder.bindRecipeImage(recipeData);
-        }
-
-        @Override
-        public int getItemCount() {
-            return mRecipes.size();
-        }
     }
 
+    @Override
+    public void handleErrorDataFromServer(BaseModel errorModel) {
+
+    }
+
+    @Override
+    public void networkConnectionError() {
+
+    }
+
+    @Override
+    public void handleInvalidData(BaseModel reqModel) {
+
+    }
 
     //method using Volley to fetch the data from the database.
     private void fetchRecipes(final String query) {
@@ -219,7 +177,6 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-
     //Method used to parse the JSON that we got in the response from the server.
     private List<RecipeData> getRecipeDatas(String result) {
 
@@ -243,6 +200,69 @@ public class SearchActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return recipeDatas;
+    }
+
+    //Class used to define the viewHolder of the recyclerView.
+    private class RecipeHolder extends RecyclerView.ViewHolder {
+
+        private TextView mRecipeNameTextView;
+        private TextView mRecipeIngredientsTextView;
+        private ImageView mRecipeImageView;
+
+        //Constructor called in the adapter class.
+        RecipeHolder(LayoutInflater layoutInflater, ViewGroup container) {
+            super(layoutInflater.
+                    inflate(R.layout.recipe_list_item, container, false));
+
+            mRecipeNameTextView = itemView.findViewById(R.id.recipe_name_list_item_textView);
+
+            mRecipeIngredientsTextView = itemView.findViewById(R.id.ingredients_list_item_textView);
+
+            mRecipeImageView = itemView.findViewById(R.id.recipe_image_image_view);
+        }
+
+        //Method used in adapter to bind the data in the viewHolder.
+        void recipeViewHolder(RecipeData recipeData) {
+            mRecipeData = recipeData;
+            mRecipeNameTextView.setText(mRecipeData.getRecipeName());
+            mRecipeIngredientsTextView.setText(mRecipeData.getRecipeIngredients());
+        }
+
+        //Method used in adapter to download the image from the server and load it into the
+        //recycler view using Picasso API.
+        void bindRecipeImage(RecipeData recipeData) {
+            Picasso.with(getApplicationContext()).load(recipeData.getmImageUrl())
+                    .transform(new RoundedTransformation(50, 4))
+                    .into(mRecipeImageView);
+        }
+    }
+
+    //Adapter class used for recyclerView.
+    private class RecipeAdapter extends RecyclerView.Adapter<RecipeHolder> {
+
+        private List<RecipeData> mRecipes;
+
+        RecipeAdapter(List<RecipeData> recipes) {
+            mRecipes = recipes;
+        }
+
+        @Override
+        public RecipeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+            return new RecipeHolder(inflater, parent);
+        }
+
+        @Override
+        public void onBindViewHolder(RecipeHolder holder, int position) {
+            RecipeData recipeData = mRecipes.get(position);
+            holder.recipeViewHolder(recipeData);
+            holder.bindRecipeImage(recipeData);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mRecipes.size();
+        }
     }
 
 
