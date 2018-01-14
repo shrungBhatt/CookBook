@@ -5,6 +5,7 @@
     <color name="colorAccent">#f8a300</color>
 
     <color name="white">#ffffff</color>
+    <color name="light_gray">#E0E0E0</color>
 
     <integer-array name="gplus_colors">
         <item>@color/gplus_color_1</item>
