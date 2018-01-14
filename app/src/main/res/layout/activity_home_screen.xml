@@ -113,6 +113,7 @@
             android:elevation="6dp">
 
             <FrameLayout
+                android:id="@+id/categories_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center">
@@ -150,6 +151,7 @@
             android:elevation="6dp">
 
             <FrameLayout
+                android:id="@+id/favourite_recipes_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center">

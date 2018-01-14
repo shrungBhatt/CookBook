@@ -16,23 +16,27 @@
         <activity android:name=".SearchActivity"/>
 
         <activity android:name=".SplashScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
-
-        <activity android:name=".HomeScreen">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
+
+        <activity android:name=".HomeScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".AllRecipeActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeScreen"
+            android:label="All Recipes"/>
+
+        <activity android:name=".FavouriteRecipeActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeScreen"
+            android:label="Favorites"/>
 
     </application>
 

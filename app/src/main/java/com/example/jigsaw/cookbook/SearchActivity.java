@@ -39,38 +39,19 @@ import Utility.SimpleDividerItemDecoration;
 public class SearchActivity extends BaseActivity {
 
     private static final String TAG = "SearchActivity";
-    //    private SearchView mIngredientSearchView;
     private List<String> mIngredientsList;
     private RecyclerView mRecipeRecyclerView;
     private RecipeData mRecipeData;
     private List<RecipeData> mRecipeDatasRedundant;
     private List<RecipeData> mRecipeDatas;
     private ProgressWheel mProgressWheel;
-//    private EditText mSearchEditText;
-//    private ImageButton mSearchImageButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        //This is used to change the color of the app name in the action bar.
-//        getSupportActionBar().
-//                setTitle(Html.fromHtml("<font color=\"#f8a300\">" +
-//                        getString(R.string.app_name) + "</font>"));
-
-
-//        mIngredientSearchView = findViewById(R.id.enter_ingredient_search_view);
-
-//        mSearchEditText = findViewById(R.id.search_ingredients_edit_text);
-//
-//        mSearchImageButton = findViewById(R.id.search_ingredients_image_button);
-//        mSearchImageButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                fetchRecipes(mSearchEditText.getText().toString());
-//            }
-//        });
 
         //RecyclerView to display the recipes fetched from the database.
         mRecipeRecyclerView = findViewById(R.id.recipes_recyclerView);

@@ -17,7 +17,33 @@ public class RecipeData extends BaseModel{
     private String mRecipeIngredients;
     @SerializedName("image_url")
     private String mImageUrl;
+    private String mRecipeCategory;
+    private String mRecipeCuisine;
+    private int mIsRecipeFav;
 
+    public String getmRecipeCategory() {
+        return mRecipeCategory;
+    }
+
+    public void setmRecipeCategory(String mRecipeCategory) {
+        this.mRecipeCategory = mRecipeCategory;
+    }
+
+    public String getmRecipeCuisine() {
+        return mRecipeCuisine;
+    }
+
+    public void setmRecipeCuisine(String mRecipeCuisine) {
+        this.mRecipeCuisine = mRecipeCuisine;
+    }
+
+    public int getmIsRecipeFav() {
+        return mIsRecipeFav;
+    }
+
+    public void setmIsRecipeFav(int mIsRecipeFav) {
+        this.mIsRecipeFav = mIsRecipeFav;
+    }
 
     public int getId() {
         return mId;
