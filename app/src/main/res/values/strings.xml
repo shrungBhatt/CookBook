@@ -3,5 +3,9 @@
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
 
     <string name="app_name_cookbook">CookBook</string>
+    <string name="all_recipes">All Recipes</string>
+    <string name="cuisines">Cuisines</string>
+    <string name="categories">Categories</string>
+    <string name="favourite_recipes">Favourite Recipes</string>
 
 </resources>
