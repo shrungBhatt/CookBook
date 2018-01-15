@@ -35,6 +35,17 @@
         <item name="cpb_rotation_speed">@string/cpb_default_rotation_speed</item>
     </style>
 
+    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:displayOptions">useLogo|showHome</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="AppTheme">
+        <item name="windowActionBarOverlay">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
 
 
     <style name="AppTheme.AppBarOverlay" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar" />

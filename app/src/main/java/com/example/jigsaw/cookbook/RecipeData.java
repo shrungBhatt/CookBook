@@ -5,6 +5,8 @@ package com.example.jigsaw.cookbook;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 import Model.BaseModel;
 
 public class RecipeData extends BaseModel{
@@ -20,6 +22,33 @@ public class RecipeData extends BaseModel{
     private String mRecipeCategory;
     private String mRecipeCuisine;
     private int mIsRecipeFav;
+    private static List<RecipeData> mRecipeDatas;
+    private String mRecipeOverview;
+    private float mRecipeRating;
+
+    public String getmRecipeOverview() {
+        return mRecipeOverview;
+    }
+
+    public void setmRecipeOverview(String mRecipeOverview) {
+        this.mRecipeOverview = mRecipeOverview;
+    }
+
+    public float getmRecipeRating() {
+        return mRecipeRating;
+    }
+
+    public void setmRecipeRating(float mRecipeRating) {
+        this.mRecipeRating = mRecipeRating;
+    }
+
+    public static List<RecipeData> getmRecipeDatas() {
+        return mRecipeDatas;
+    }
+
+    public static void setmRecipeDatas(List<RecipeData> recipeDatas) {
+        mRecipeDatas = recipeDatas;
+    }
 
     public String getmRecipeCategory() {
         return mRecipeCategory;

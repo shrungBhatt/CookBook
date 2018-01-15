@@ -34,6 +34,8 @@ public class JSONParser {
                 recipeData.setmIsRecipeFav(Integer.valueOf(jsonObject.getString("favourite")));
                 recipeData.setmRecipeCategory(jsonObject.getString("category"));
                 recipeData.setmRecipeCuisine(jsonObject.getString("cuisine"));
+                recipeData.setmRecipeOverview(jsonObject.getString("overview"));
+                recipeData.setmRecipeRating(Float.valueOf(jsonObject.getString("rating")));
 
                 recipeDatas.add(recipeData);
             }

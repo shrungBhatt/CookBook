@@ -1,6 +1,7 @@
 package Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.jigsaw.cookbook.R;
 import com.example.jigsaw.cookbook.RecipeData;
+import com.example.jigsaw.cookbook.RecipePagerActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,10 +28,12 @@ public class RecipeRecyclerViewAdapter extends
 
     private Context mContext;
     private List<RecipeData> mRecipeDatas;
+    private int mActivityId;
 
-    public RecipeRecyclerViewAdapter(Context context, List<RecipeData> recipeDatas){
+    public RecipeRecyclerViewAdapter(Context context, List<RecipeData> recipeDatas,int activityId){
         mContext = context;
         mRecipeDatas = recipeDatas;
+        mActivityId = activityId;
     }
 
 
@@ -42,13 +46,15 @@ public class RecipeRecyclerViewAdapter extends
 
     @Override
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
-        RecipeData recipeData = mRecipeDatas.get(position);
+        final RecipeData recipeData = mRecipeDatas.get(position);
 
         holder.bindRecipesData(recipeData);
         holder.bindRecipeImage(recipeData,mContext);
         holder.mFrameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = RecipePagerActivity.newIntent(mContext,recipeData.getId(),mActivityId);
+                mContext.startActivity(intent);
 
             }
         });

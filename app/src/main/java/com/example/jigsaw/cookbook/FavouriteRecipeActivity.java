@@ -23,6 +23,7 @@ import java.util.Map;
 import Adapters.RecipeRecyclerViewAdapter;
 import Model.BaseModel;
 import Utility.JSONParser;
+import Utility.MySharedPreferences;
 
 /**
  * Created by jigsaw on 14/1/18.
@@ -80,13 +81,14 @@ public class FavouriteRecipeActivity extends BaseActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        MySharedPreferences.setFavrtRecipeArrayJson(context,response);
                         //Parsing the JSON string that we received in the response of the request.
                         mRecipeDatas = JSONParser.getRecipeDatas(response);
 
                         //Setting the recyclerView with the ArrayList that we obtained by parsing
                         //the response string.
                         mFavrtRecipeRecyclerView.
-                                setAdapter(new RecipeRecyclerViewAdapter(context,mRecipeDatas));
+                                setAdapter(new RecipeRecyclerViewAdapter(context,mRecipeDatas,1));
                     }
                 },
                 new Response.ErrorListener() {

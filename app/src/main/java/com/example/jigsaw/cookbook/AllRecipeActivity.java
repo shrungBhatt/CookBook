@@ -16,11 +16,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +23,7 @@ import java.util.Map;
 import Adapters.RecipeRecyclerViewAdapter;
 import Model.BaseModel;
 import Utility.JSONParser;
+import Utility.MySharedPreferences;
 
 /**
  * Created by jigsaw on 14/1/18.
@@ -87,13 +83,15 @@ public class AllRecipeActivity extends BaseActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        MySharedPreferences.setAllRecipeArrayJson(context,response);
                         //Parsing the JSON string that we received in the response of the request.
                         mRecipeDatas = JSONParser.getRecipeDatas(response);
+                        RecipeData.setmRecipeDatas(mRecipeDatas);
 
                         //Setting the recyclerView with the ArrayList that we obtained by parsing
                         //the response string.
                         mRecipeRecyclerView.
-                                setAdapter(new RecipeRecyclerViewAdapter(context,mRecipeDatas));
+                                setAdapter(new RecipeRecyclerViewAdapter(context,mRecipeDatas,0));
                     }
                 },
                 new Response.ErrorListener() {
