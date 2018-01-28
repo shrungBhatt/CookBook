@@ -62,6 +62,10 @@ public class RecipePagerActivity extends BaseActivity {
                 mRecipeDatas = JSONParser.
                         getRecipeDatas(MySharedPreferences.getFavrtRecipeArrayJson(this));
                 break;
+
+            case 2:
+                mRecipeDatas = JSONParser.
+                        getRecipeDatas(MySharedPreferences.getRecipeDatasByCategory(this));
         }
 
 

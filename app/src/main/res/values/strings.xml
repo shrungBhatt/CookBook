@@ -7,5 +7,15 @@
     <string name="cuisines">Cuisines</string>
     <string name="categories">Categories</string>
     <string name="favourite_recipes">Favourite Recipes</string>
+    <string name="recipe_category_name">Recipe Category Name</string>
+
+
+    <string-array name="type_of_categories">
+        <item>Select Category</item>
+        <item>Snack</item>
+        <item>Dessert</item>
+        <item>Starter</item>
+        <item>Curry</item>
+    </string-array>
 
 </resources>

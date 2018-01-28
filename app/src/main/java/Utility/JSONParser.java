@@ -1,5 +1,7 @@
 package Utility;
 
+import android.util.Log;
+
 import com.example.jigsaw.cookbook.RecipeData;
 
 import org.json.JSONArray;
@@ -15,12 +17,14 @@ import java.util.List;
 
 public class JSONParser {
 
+    private static final String TAG = "JSONParser";
 
     public static List<RecipeData> getRecipeDatas(String result) {
 
         List<RecipeData> recipeDatas = new ArrayList<>();
         try {
             JSONArray jsonArray = new JSONArray(result);
+
             //Loop used for storing the data in the ArrayList, by parsing the response string.
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);

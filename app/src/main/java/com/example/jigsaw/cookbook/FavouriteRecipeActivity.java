@@ -36,7 +36,7 @@ public class FavouriteRecipeActivity extends BaseActivity {
     private List<RecipeData> mRecipeDatas;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_recipe);
 
@@ -44,7 +44,7 @@ public class FavouriteRecipeActivity extends BaseActivity {
         mFavrtRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        fetchFavRecipes(this,",");
+        fetchFavRecipes(this, ",");
 
     }
 
@@ -60,13 +60,13 @@ public class FavouriteRecipeActivity extends BaseActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                fetchFavRecipes(FavouriteRecipeActivity.this,s);
+                fetchFavRecipes(FavouriteRecipeActivity.this, s);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                fetchFavRecipes(FavouriteRecipeActivity.this,s);
+                fetchFavRecipes(FavouriteRecipeActivity.this, s);
                 return true;
             }
         });
@@ -81,14 +81,21 @@ public class FavouriteRecipeActivity extends BaseActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        MySharedPreferences.setFavrtRecipeArrayJson(context,response);
-                        //Parsing the JSON string that we received in the response of the request.
-                        mRecipeDatas = JSONParser.getRecipeDatas(response);
 
-                        //Setting the recyclerView with the ArrayList that we obtained by parsing
-                        //the response string.
-                        mFavrtRecipeRecyclerView.
-                                setAdapter(new RecipeRecyclerViewAdapter(context,mRecipeDatas,1));
+                        try {
+                            MySharedPreferences.setFavrtRecipeArrayJson(context, response);
+                            //Parsing the JSON string that we received in the response of the request.
+                            mRecipeDatas = JSONParser.getRecipeDatas(response);
+
+                            //Setting the recyclerView with the ArrayList that we obtained by parsing
+                            //the response string.
+                            if (mRecipeDatas.size() != 0) {
+                                mFavrtRecipeRecyclerView.
+                                        setAdapter(new RecipeRecyclerViewAdapter(context, mRecipeDatas, 1));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {

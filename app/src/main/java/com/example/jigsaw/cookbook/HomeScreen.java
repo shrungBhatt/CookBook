@@ -51,11 +51,10 @@ public class HomeScreen extends BaseActivity {
                 break;
 
             case R.id.cuisines_button:
-                makeToast(this,"Cuisines Button Clicked");
                 break;
 
             case R.id.categories_button:
-                makeToast(this,"Categories Button Clicked");
+                startActivity(new Intent(this,RecipeCategoriesActivity.class));
                 break;
 
             case R.id.favourite_recipes_button:

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recipe_category_recyclerview_list_item"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent"
+    android:textSize="20sp"
+    android:textColor="@color/colorPrimary"
+    android:text="@string/recipe_category_name"
+    android:layout_marginTop="4dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
+    android:textStyle="bold"
+    android:layout_height="wrap_content">
+
+</TextView>

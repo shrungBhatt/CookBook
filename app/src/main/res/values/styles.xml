@@ -47,6 +47,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 
+    <style name="MySpinnerStyle" parent="android:Widget.Material.Light.Spinner" >
+        <item name="android:background">@color/colorPrimary</item>
+
+    </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar" />
 

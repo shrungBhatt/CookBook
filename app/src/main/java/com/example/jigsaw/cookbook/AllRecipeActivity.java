@@ -83,15 +83,23 @@ public class AllRecipeActivity extends BaseActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        MySharedPreferences.setAllRecipeArrayJson(context,response);
-                        //Parsing the JSON string that we received in the response of the request.
-                        mRecipeDatas = JSONParser.getRecipeDatas(response);
-                        RecipeData.setmRecipeDatas(mRecipeDatas);
 
-                        //Setting the recyclerView with the ArrayList that we obtained by parsing
-                        //the response string.
-                        mRecipeRecyclerView.
-                                setAdapter(new RecipeRecyclerViewAdapter(context,mRecipeDatas,0));
+                        try {
+                            MySharedPreferences.setAllRecipeArrayJson(context, response);
+                            //Parsing the JSON string that we received in the response of the request.
+                            mRecipeDatas = JSONParser.getRecipeDatas(response);
+                            RecipeData.setmRecipeDatas(mRecipeDatas);
+
+                            //Setting the recyclerView with the ArrayList that we obtained by parsing
+                            //the response string.
+                            if (mRecipeDatas.size() != 0) {
+                                mRecipeRecyclerView.
+                                        setAdapter(new RecipeRecyclerViewAdapter(context, mRecipeDatas, 0));
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {

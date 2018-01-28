@@ -5,6 +5,8 @@ package com.example.jigsaw.cookbook;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import Model.BaseModel;
@@ -25,6 +27,15 @@ public class RecipeData extends BaseModel{
     private static List<RecipeData> mRecipeDatas;
     private String mRecipeOverview;
     private float mRecipeRating;
+    private static JSONObject mJSONObject;
+
+    public static JSONObject getmJSONObject() {
+        return mJSONObject;
+    }
+
+    public static void setmJSONObject(JSONObject mJSONObject) {
+        RecipeData.mJSONObject = mJSONObject;
+    }
 
     public String getmRecipeOverview() {
         return mRecipeOverview;

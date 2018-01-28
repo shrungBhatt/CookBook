@@ -40,8 +40,17 @@
 
         <activity android:name=".RecipePagerActivity"
             android:screenOrientation="portrait"
-            android:label="Recipes"
             android:theme="@style/AppTheme.ActionBar.Transparent"/>
+
+        <activity android:name=".RecipeCategoriesActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeScreen"
+            android:label="Categories"/>
+
+        <activity android:name=".RecipeCuisinesCategory"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeScreen"
+            android:label="Cuisines"/>
 
     </application>
 
