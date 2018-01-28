@@ -42,6 +42,7 @@ public class RecipePagerActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_view_pager);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         int recipeId = (int) getIntent().getSerializableExtra(EXTRA_RECIPE_ID);
         int activityId = (int) getIntent().getSerializableExtra(EXTRA_ACTIVITY_ID);
@@ -66,6 +67,11 @@ public class RecipePagerActivity extends BaseActivity {
             case 2:
                 mRecipeDatas = JSONParser.
                         getRecipeDatas(MySharedPreferences.getRecipeDatasByCategory(this));
+                break;
+
+            case 3:
+                mRecipeDatas = JSONParser.
+                        getRecipeDatas(MySharedPreferences.getRecipeDatasByCuisines(this));
         }
 
 

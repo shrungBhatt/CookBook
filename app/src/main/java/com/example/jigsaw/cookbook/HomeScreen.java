@@ -51,6 +51,7 @@ public class HomeScreen extends BaseActivity {
                 break;
 
             case R.id.cuisines_button:
+                startActivity(new Intent(this,RecipeCuisinesCategory.class));
                 break;
 
             case R.id.categories_button:

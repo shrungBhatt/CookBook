@@ -12,6 +12,7 @@ public class MySharedPreferences {
     private static String PREF_RECIPE_ARRAY_JSON = "allRecipeArrayList";
     private static String PREF_FAVRT_RECIPE_ARRAY_JSON = "favrtRecipeArrayList";
     private static String PREF_RECIPE_BYCATEGORY = "recipeByCategory";
+    private static String PREF_RECIPE_BYCUISINES = "recipeByCuisines";
 
 
 
@@ -47,6 +48,17 @@ public class MySharedPreferences {
     public static void setRecipeDatasByCategory(Context context, String arrayJson){
         PreferenceManager.getDefaultSharedPreferences(context).edit()
                 .putString(PREF_RECIPE_BYCATEGORY,arrayJson).apply();
+
+    }
+
+    public static String getRecipeDatasByCuisines(Context context){
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(PREF_RECIPE_BYCUISINES,null);
+    }
+
+    public static void setRecipeDatasByCuisines(Context context, String arrayJson){
+        PreferenceManager.getDefaultSharedPreferences(context).edit()
+                .putString(PREF_RECIPE_BYCUISINES,arrayJson).apply();
 
     }
 
