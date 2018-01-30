@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import Model.BaseModel;
+import Utility.MySharedPreferences;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,6 +36,12 @@ public class HomeScreen extends BaseActivity {
         setContentView(R.layout.activity_home_screen);
         ButterKnife.bind(this);
 
+
+        if(MySharedPreferences.getStoredLoginStatus(this)&&
+                LoginActivity.mActive){
+
+            LoginActivity.mActivity.finish();
+        }
 
     }
 

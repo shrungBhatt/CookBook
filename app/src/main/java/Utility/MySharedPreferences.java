@@ -13,6 +13,8 @@ public class MySharedPreferences {
     private static String PREF_FAVRT_RECIPE_ARRAY_JSON = "favrtRecipeArrayList";
     private static String PREF_RECIPE_BYCATEGORY = "recipeByCategory";
     private static String PREF_RECIPE_BYCUISINES = "recipeByCuisines";
+    private static final String PREF_LOGIN_STATE = "login state";
+
 
 
 
@@ -60,6 +62,18 @@ public class MySharedPreferences {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
                 .putString(PREF_RECIPE_BYCUISINES,arrayJson).apply();
 
+    }
+
+    public static Boolean getStoredLoginStatus (Context context){
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(PREF_LOGIN_STATE,false);
+    }
+
+    public static void setStoredLoginStatus (Context context, Boolean status){
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(PREF_LOGIN_STATE,status)
+                .apply();
     }
 
 
