@@ -14,6 +14,8 @@ public class MySharedPreferences {
     private static String PREF_RECIPE_BYCATEGORY = "recipeByCategory";
     private static String PREF_RECIPE_BYCUISINES = "recipeByCuisines";
     private static final String PREF_LOGIN_STATE = "login state";
+    private static final String PREF_USERNAME = "username";
+
 
 
 
@@ -73,6 +75,18 @@ public class MySharedPreferences {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putBoolean(PREF_LOGIN_STATE,status)
+                .apply();
+    }
+
+    public static String getStoredUsername (Context context){
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(PREF_USERNAME,null);
+    }
+
+    public static void setStoredUsername (Context context, String status){
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString(PREF_USERNAME,status)
                 .apply();
     }
 

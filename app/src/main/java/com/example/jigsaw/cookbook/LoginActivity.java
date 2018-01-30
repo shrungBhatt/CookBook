@@ -100,6 +100,7 @@ public class LoginActivity extends BaseActivity {
                             if (response != null &&
                                     !response.equals("Wrong Username or Password")) {
                                 MySharedPreferences.setStoredLoginStatus(LoginActivity.this, true);
+                                MySharedPreferences.setStoredUsername(LoginActivity.this,userName);
                                 Intent i = new Intent(LoginActivity.this, HomeScreen.class);
                                 startActivity(i);
                             } else {

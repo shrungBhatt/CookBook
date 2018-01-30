@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.jigsaw.cookbook.FeedBackDialog;
 import com.example.jigsaw.cookbook.R;
 import com.example.jigsaw.cookbook.RecipeData;
 import com.example.jigsaw.cookbook.RecipePagerActivity;
@@ -22,8 +23,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import Adapters.IngredientsRecyclerViewAdapter;
-import Utility.JSONParser;
-import Utility.MySharedPreferences;
 import Utility.SimpleDividerItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -142,6 +141,15 @@ public class RecipeFragment extends BaseFragment {
                 }
 
 
+            }
+        });
+
+        mFeedBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FeedBackDialog feedBackDialog = new FeedBackDialog(getActivity(),
+                        mRecipeDatas.get(mArrayPosition).getRecipeName());
+                feedBackDialog.show();
             }
         });
 

@@ -11,54 +11,57 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-        <activity android:name=".SearchActivity"/>
-
-        <activity android:name=".SplashScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+        <activity android:name=".SearchActivity" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".HomeScreen"
+        <activity
+            android:name=".HomeScreen"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".AllRecipeActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".AllRecipeActivity"
+            android:label="All Recipes"
             android:parentActivityName=".HomeScreen"
-            android:label="All Recipes"/>
-
-        <activity android:name=".FavouriteRecipeActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FavouriteRecipeActivity"
+            android:label="Favorites"
             android:parentActivityName=".HomeScreen"
-            android:label="Favorites"/>
-
-        <activity android:name=".RecipePagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RecipePagerActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ActionBar.Transparent"/>
-
-        <activity android:name=".RecipeCategoriesActivity"
-            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar.Transparent" />
+        <activity
+            android:name=".RecipeCategoriesActivity"
+            android:label="Categories"
             android:parentActivityName=".HomeScreen"
-            android:label="Categories"/>
-
-        <activity android:name=".RecipeCuisinesCategory"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RecipeCuisinesCategory"
+            android:label="Cuisines"
             android:parentActivityName=".HomeScreen"
-            android:label="Cuisines"/>
-
-        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".Activity_Signup"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Activity_Signup"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity android:name=".FeedBackActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
 
     </application>
 
