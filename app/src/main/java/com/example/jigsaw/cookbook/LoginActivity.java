@@ -2,6 +2,7 @@ package com.example.jigsaw.cookbook;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -48,7 +49,12 @@ public class LoginActivity extends BaseActivity {
 
         boolean status = MySharedPreferences.getStoredLoginStatus(LoginActivity.this);
         if (status) {
-            Intent i = new Intent(this, HomeScreen.class);
+            Intent i ;
+            if (MySharedPreferences.isAdminLoggedOn(this)) {
+                i = new Intent(this,FeedBackActivity.class);
+            }else {
+                i = new Intent(this, HomeScreen.class);
+            }
             startActivity(i);
         }
 
@@ -66,6 +72,11 @@ public class LoginActivity extends BaseActivity {
                 String pass = mUserPassword.getText().toString();
 
                 if (!emailId.equals("") || !pass.equals("")) {
+                    if (emailId.equals("admin")) {
+                        macId = "00:00:00:00:00:00";
+                        requestLogin(macId, emailId, pass);
+                    }
+
                     requestLogin(macId, emailId, pass);
                 } else {
                     mUserEmail.setError("Fill it up");
@@ -100,8 +111,14 @@ public class LoginActivity extends BaseActivity {
                             if (response != null &&
                                     !response.equals("Wrong Username or Password")) {
                                 MySharedPreferences.setStoredLoginStatus(LoginActivity.this, true);
-                                MySharedPreferences.setStoredUsername(LoginActivity.this,userName);
-                                Intent i = new Intent(LoginActivity.this, HomeScreen.class);
+                                MySharedPreferences.setStoredUsername(LoginActivity.this, userName);
+                                Intent i;
+                                if (userName.equals("admin")) {
+                                    MySharedPreferences.setIsAdminLoggedOn(LoginActivity.this,true);
+                                    i = new Intent(LoginActivity.this, FeedBackActivity.class);
+                                } else {
+                                    i = new Intent(LoginActivity.this, HomeScreen.class);
+                                }
                                 startActivity(i);
                             } else {
                                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT)

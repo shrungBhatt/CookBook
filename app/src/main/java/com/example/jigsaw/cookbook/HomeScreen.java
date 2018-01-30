@@ -2,6 +2,7 @@ package com.example.jigsaw.cookbook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -16,6 +17,8 @@ import butterknife.OnClick;
  */
 
 public class HomeScreen extends BaseActivity {
+
+    private final String TAG = "HomeScreen";
 
     @BindView(R.id.all_recipes_button)
     FrameLayout mAllRecipeButton;
@@ -37,10 +40,14 @@ public class HomeScreen extends BaseActivity {
         ButterKnife.bind(this);
 
 
-        if(MySharedPreferences.getStoredLoginStatus(this)&&
-                LoginActivity.mActive){
+        try {
+            if (MySharedPreferences.getStoredLoginStatus(this) &&
+                    LoginActivity.mActive) {
 
-            LoginActivity.mActivity.finish();
+                LoginActivity.mActivity.finish();
+            }
+        }catch (Exception e){
+            Log.e(TAG,e.toString());
         }
 
     }

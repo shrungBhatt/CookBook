@@ -14,6 +14,8 @@ public class MySharedPreferences {
     private static String PREF_RECIPE_BYCATEGORY = "recipeByCategory";
     private static String PREF_RECIPE_BYCUISINES = "recipeByCuisines";
     private static final String PREF_LOGIN_STATE = "login state";
+    private static final String PREF_ADMIN_LOGIN_STATE = "admin login state";
+
     private static final String PREF_USERNAME = "username";
 
 
@@ -87,6 +89,18 @@ public class MySharedPreferences {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putString(PREF_USERNAME,status)
+                .apply();
+    }
+
+    public static Boolean isAdminLoggedOn (Context context){
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(PREF_ADMIN_LOGIN_STATE,false);
+    }
+
+    public static void setIsAdminLoggedOn (Context context, Boolean status){
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(PREF_ADMIN_LOGIN_STATE,status)
                 .apply();
     }
 

@@ -11,6 +11,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.FeedBackData;
+
 /**
  * Created by jigsaw on 14/1/18.
  */
@@ -49,5 +51,33 @@ public class JSONParser {
         return recipeDatas;
     }
 
+
+    public static List<FeedBackData> getFeedBackDatas(String result) {
+
+        List<FeedBackData> feedBackDatas = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(result);
+
+            //Loop used for storing the data in the ArrayList, by parsing the response string.
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                FeedBackData feedBackData = new FeedBackData();
+
+                feedBackData.setmRecipeName(jsonObject.getString("recipe_name"));
+                feedBackData.setmId(jsonObject.getString("id"));
+                feedBackData.setmMacId(jsonObject.getString("mac_id"));
+                feedBackData.setmAuthor(jsonObject.getString("username"));
+                feedBackData.setmReview(jsonObject.getString("review"));
+                feedBackData.setmRating(jsonObject.getString("rating"));
+                feedBackData.setmDate(jsonObject.getString("date"));
+
+                feedBackDatas.add(feedBackData);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return feedBackDatas;
+    }
 
 }

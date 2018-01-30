@@ -60,7 +60,10 @@
 
         <activity android:name=".FeedBackActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" >
+
+
+        </activity>
 
 
     </application>
