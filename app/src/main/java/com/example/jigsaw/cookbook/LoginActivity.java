@@ -74,10 +74,10 @@ public class LoginActivity extends BaseActivity {
                 if (!emailId.equals("") || !pass.equals("")) {
                     if (emailId.equals("admin")) {
                         macId = "00:00:00:00:00:00";
-                        requestLogin(macId, emailId, pass);
+                        requestLogin(macId, emailId, pass);//Login request for admin
                     }
 
-                    requestLogin(macId, emailId, pass);
+                    requestLogin(macId, emailId, pass);//Login request for the user.
                 } else {
                     mUserEmail.setError("Fill it up");
                     mUserPassword.setError("Fill it up");

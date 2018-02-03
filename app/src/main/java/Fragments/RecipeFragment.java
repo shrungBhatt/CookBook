@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import Adapters.IngredientsRecyclerViewAdapter;
+import Utility.PDFGenerator;
 import Utility.SimpleDividerItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -150,6 +151,17 @@ public class RecipeFragment extends BaseFragment {
                 FeedBackDialog feedBackDialog = new FeedBackDialog(getActivity(),
                         mRecipeDatas.get(mArrayPosition).getRecipeName());
                 feedBackDialog.show();
+            }
+        });
+
+        mPdfButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              String fileName =  mRecipeDatas.get(mArrayPosition).getRecipeName() +
+                      " Ingredients";
+
+              PDFGenerator.write(fileName, mIngredients,getActivity());
+
             }
         });
 
