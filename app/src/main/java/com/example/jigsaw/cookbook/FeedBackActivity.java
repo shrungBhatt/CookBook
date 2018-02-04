@@ -75,11 +75,14 @@ public class FeedBackActivity extends BaseActivity {
 
 
     private void fetchFeedBackData(final Context context){
+
+        showProgressBar(context,TAG);
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/fetch_recipe_feedback_data.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        hideProgressBar();
                             mFeedBackDatas = JSONParser.getFeedBackDatas(response);
 
                             if(mFeedBackDatas.size() != 0){
@@ -90,7 +93,7 @@ public class FeedBackActivity extends BaseActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                hideProgressBar();
                 Log.e(TAG, error.toString());
 
             }

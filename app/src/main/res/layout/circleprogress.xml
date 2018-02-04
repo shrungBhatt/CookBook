@@ -5,11 +5,9 @@
     android:layout_height="50dp"
     android:background="@drawable/circlelayout">
 
-    <CircularProgressBar.CircularprogressBar
-        android:id="@+id/circleview"
+    <ProgressBar
         android:layout_width="wrap_content"
-        android:padding="10dp"
         android:layout_height="wrap_content"
-        app:cpb_colors="@array/gplus_colors"/>
+        android:padding="10dp"/>
 
 </LinearLayout>

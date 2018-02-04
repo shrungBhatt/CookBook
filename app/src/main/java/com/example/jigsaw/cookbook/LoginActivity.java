@@ -100,12 +100,14 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void requestLogin(final String mac_id, final String userName, final String password) {
+        showProgressBar(this,TAG);
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/cook_book_login.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        hideProgressBar();
                         try {
                             if (response != null &&
                                     !response.equals("Wrong Username or Password")) {
@@ -133,6 +135,7 @@ public class LoginActivity extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        hideProgressBar();
                         Log.e(TAG, error.toString());
                     }
                 }) {

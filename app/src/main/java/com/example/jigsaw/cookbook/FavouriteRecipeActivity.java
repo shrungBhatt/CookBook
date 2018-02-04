@@ -75,6 +75,7 @@ public class FavouriteRecipeActivity extends BaseActivity {
 
     private void fetchFavRecipes(final Context context, final String query) {
 
+        showProgressBar(context,TAG);
         //Building the request to be send to the server.
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/fetch_favourite_recipe.php",
@@ -82,6 +83,7 @@ public class FavouriteRecipeActivity extends BaseActivity {
                     @Override
                     public void onResponse(String response) {
 
+                        hideProgressBar();
                         try {
                             MySharedPreferences.setFavrtRecipeArrayJson(context, response);
                             //Parsing the JSON string that we received in the response of the request.
@@ -101,6 +103,7 @@ public class FavouriteRecipeActivity extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        hideProgressBar();
                         Log.e(TAG, "Got an error: " + error.toString());
                     }
                 }) {

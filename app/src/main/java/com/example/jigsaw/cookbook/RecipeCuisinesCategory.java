@@ -71,12 +71,14 @@ public class RecipeCuisinesCategory extends BaseActivity implements AdapterView.
     }
 
     private void fetchRecipeAccToCuisines(final Context context, final String cuisines) {
+        showProgressBar(context,TAG);
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/fetch_recipe_by_cuisines.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
+                        hideProgressBar();
                         try {
                             mRecipeDatas = JSONParser.getRecipeDatas(response);
 
@@ -98,6 +100,7 @@ public class RecipeCuisinesCategory extends BaseActivity implements AdapterView.
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        hideProgressBar();
                         Log.e(TAG,error.toString());
                     }
                 }) {

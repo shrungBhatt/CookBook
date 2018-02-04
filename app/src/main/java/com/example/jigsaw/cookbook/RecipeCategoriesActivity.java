@@ -76,12 +76,14 @@ public class RecipeCategoriesActivity extends BaseActivity implements AdapterVie
 
 
     private void fetchRecipeAccToCategories(final Context context, final String category) {
+        showProgressBar(context,TAG);
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/fetch_recipe_by_category.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
+                        hideProgressBar();
                         try {
                             mRecipeDatas = JSONParser.getRecipeDatas(response);
 
@@ -103,6 +105,7 @@ public class RecipeCategoriesActivity extends BaseActivity implements AdapterVie
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        hideProgressBar();
                         Log.e(TAG,error.toString());
                     }
                 }) {

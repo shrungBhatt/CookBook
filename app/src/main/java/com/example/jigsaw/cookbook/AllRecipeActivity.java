@@ -38,7 +38,7 @@ public class AllRecipeActivity extends BaseActivity {
     private RecyclerView mRecipeRecyclerView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
@@ -46,7 +46,7 @@ public class AllRecipeActivity extends BaseActivity {
 
         mRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        fetchRecipes(this,",");
+        fetchRecipes(this, ",");
 
 
     }
@@ -62,13 +62,13 @@ public class AllRecipeActivity extends BaseActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                fetchRecipes(AllRecipeActivity.this,s);
+                fetchRecipes(AllRecipeActivity.this, s);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                fetchRecipes(AllRecipeActivity.this,s);
+                fetchRecipes(AllRecipeActivity.this, s);
                 return true;
             }
         });
@@ -77,13 +77,14 @@ public class AllRecipeActivity extends BaseActivity {
 
     private void fetchRecipes(final Context context, final String query) {
 
+        showProgressBar(context, TAG);
         //Building the request to be send to the server.
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/recipe.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        hideProgressBar();
                         try {
                             MySharedPreferences.setAllRecipeArrayJson(context, response);
                             //Parsing the JSON string that we received in the response of the request.
@@ -97,7 +98,7 @@ public class AllRecipeActivity extends BaseActivity {
                                         setAdapter(new RecipeRecyclerViewAdapter(context, mRecipeDatas, 0));
                             }
 
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -105,6 +106,7 @@ public class AllRecipeActivity extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        hideProgressBar();
                         Log.e(TAG, "Got an error: " + error.toString());
                     }
                 }) {

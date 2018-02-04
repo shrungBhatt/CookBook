@@ -78,12 +78,13 @@ public class Activity_Signup extends BaseActivity {
 
 
     private void registerUser(final String mac_id, final String userName, final String passWord) {
+        showProgressBar(this,TAG);
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/cook_book_register.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        hideProgressBar();
                         try {
                             if (response.equals("Insert SuccessFul")) {
                                 Toast.makeText(getApplicationContext(), "Registration Complete",
@@ -101,6 +102,7 @@ public class Activity_Signup extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        hideProgressBar();
                         Log.e(TAG,error.toString());
                     }
                 }) {

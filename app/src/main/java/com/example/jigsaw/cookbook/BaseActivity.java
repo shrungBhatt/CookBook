@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import Listener.CallBackListener;
@@ -47,6 +48,8 @@ public abstract class BaseActivity extends AppCompatActivity implements CallBack
     public void makeToast(Context context,String msg){
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
+
+
 
     public void showProgressBar(Context context,String TAG) {
         mProgressDialog = new Dialog(context);
