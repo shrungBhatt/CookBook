@@ -111,6 +111,7 @@ public class HomeScreen extends BaseActivity {
             if(isNetworkAvailableAndConnected()){
                 MySharedPreferences.setStoredLoginStatus(HomeScreen.this,false);
                 Intent i = new Intent(HomeScreen.this, LoginActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
                 Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
                 finish();

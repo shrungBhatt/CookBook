@@ -122,6 +122,7 @@ public class FeedBackActivity extends BaseActivity {
                 MySharedPreferences.setStoredLoginStatus(FeedBackActivity.this,false);
                 MySharedPreferences.setIsAdminLoggedOn(FeedBackActivity.this,false);
                 Intent i = new Intent(FeedBackActivity.this, LoginActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
                 Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
                 finish();
