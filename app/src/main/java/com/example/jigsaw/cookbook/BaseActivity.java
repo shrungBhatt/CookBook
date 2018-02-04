@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -73,5 +74,12 @@ public abstract class BaseActivity extends AppCompatActivity implements CallBack
         } catch (Exception e) {
             Log.e("BaseClassForInterface", "Error in hideProgressBar");
         }
+    }
+
+
+    public void addRecipe(View view){
+
+
+
     }
 }

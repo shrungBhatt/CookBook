@@ -3,24 +3,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/homescreen_background">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/homescreen_background"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:background="@android:color/transparent"
-        android:layout_marginBottom="5dp"
-        android:layout_height="wrap_content">
-    <Spinner
-        android:id="@+id/categories_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@drawable/spinner_background"
-        android:spinnerMode="dropdown"
-        android:gravity="center_vertical"/>
+        android:background="@android:color/transparent">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="1dp"
+            app:cardBackgroundColor="@color/colorPrimary">
+
+            <Spinner
+                android:id="@+id/categories_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:spinnerMode="dropdown" />
+
+        </android.support.v7.widget.CardView>
 
     </RelativeLayout>
 
