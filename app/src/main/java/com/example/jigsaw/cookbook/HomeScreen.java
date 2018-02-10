@@ -119,6 +119,8 @@ public class HomeScreen extends BaseActivity {
                 Toast.makeText(this,"No Internet Connection",Toast.LENGTH_SHORT).show();
             }
             return true;
+        }else if(id == R.id.add_recipe_menu_item){
+            startActivity(new Intent(this,AddRecipeActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

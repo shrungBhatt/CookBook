@@ -7,6 +7,7 @@
     <color name="white">#ffffff</color>
     <color name="light_gray">#E0E0E0</color>
     <color name="text_color">#FF8A80</color>
+    <color name="add_recipe_title_hint">#E06D6D</color>
 
 
 </resources>

@@ -28,7 +28,7 @@
     </string-array>
 
     <string-array name="type_of_cuisines">
-        <item>Select Category</item>
+        <item>Select Cuisine</item>
         <item>Indian</item>
         <item>Western</item>
         <item>Punjabi</item>

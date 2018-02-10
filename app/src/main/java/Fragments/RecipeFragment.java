@@ -114,8 +114,14 @@ public class RecipeFragment extends BaseFragment {
         populateRecyclerView();
 
 
-        Picasso.with(getActivity()).load(mRecipeDatas.get(mArrayPosition).getmImageUrl())
-                .into(mRecipeImageImageView);
+
+        try {
+            Picasso.with(getActivity()).load(mRecipeDatas.get(mArrayPosition).getmImageUrl())
+                    .placeholder(R.drawable.ic_image_error).into(mRecipeImageImageView);
+        }catch (Exception e){
+            e.printStackTrace();
+            mRecipeImageImageView.setImageResource(R.drawable.ic_image_error);
+        }
 
 
         final Animation rotate = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate);

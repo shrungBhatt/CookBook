@@ -90,8 +90,9 @@ public class Activity_Signup extends BaseActivity {
                                 Toast.makeText(getApplicationContext(), "Registration Complete",
                                         Toast.LENGTH_SHORT).show();
 
-                                Intent i = new Intent(Activity_Signup.this, LoginActivity.class);
-                                startActivity(i);
+                                Intent intent = new Intent(Activity_Signup.this, LoginActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                             }
                         }catch (Exception e){
                             e.printStackTrace();

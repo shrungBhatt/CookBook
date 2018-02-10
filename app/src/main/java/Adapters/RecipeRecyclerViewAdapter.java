@@ -97,9 +97,14 @@ public class RecipeRecyclerViewAdapter extends
         }
 
         void bindRecipeImage(RecipeData recipeData,Context context){
-            Picasso.with(context).load(recipeData.getmImageUrl())
-                    .transform(new RoundedTransformation(50, 4))
-                    .into(mRecipeImageView);
+            try {
+                Picasso.with(context).load(recipeData.getmImageUrl())
+                        .transform(new RoundedTransformation(50, 4))
+                        .placeholder(R.drawable.ic_image_error).into(mRecipeImageView);
+            }catch (Exception e){
+                e.printStackTrace();
+                mRecipeImageView.setImageResource(R.drawable.ic_image_error);
+            }
         }
 
 
