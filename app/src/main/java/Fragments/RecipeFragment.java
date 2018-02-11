@@ -124,9 +124,10 @@ public class RecipeFragment extends BaseFragment {
 
         try {
             Picasso.with(getActivity()).load(mRecipeDatas.get(mArrayPosition).getmImageUrl())
-                    .placeholder(R.drawable.ic_image_error).into(mRecipeImageImageView);
+                    .placeholder(R.drawable.progress_animation).into(mRecipeImageImageView);
         } catch (Exception e) {
             e.printStackTrace();
+            mRecipeImageImageView.setScaleType(ImageView.ScaleType.CENTER);
             mRecipeImageImageView.setImageResource(R.drawable.ic_image_error);
         }
 

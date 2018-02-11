@@ -100,9 +100,10 @@ public class RecipeRecyclerViewAdapter extends
             try {
                 Picasso.with(context).load(recipeData.getmImageUrl())
                         .transform(new RoundedTransformation(50, 4))
-                        .placeholder(R.drawable.ic_image_error).into(mRecipeImageView);
+                        .placeholder(R.drawable.progress_animation).into(mRecipeImageView);
             }catch (Exception e){
                 e.printStackTrace();
+                mRecipeImageView.setScaleType(ImageView.ScaleType.CENTER);
                 mRecipeImageView.setImageResource(R.drawable.ic_image_error);
             }
         }
