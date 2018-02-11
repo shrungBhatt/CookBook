@@ -58,15 +58,16 @@ public class Activity_Signup extends BaseActivity {
                 String password = mUserPassword.getText().toString().trim();
                 String repass = mRetypePassword.getText().toString().trim();
 
-                if (repass.equals(password)) {
-
-                    registerUser(mMacId,userName,password);
 
 
-                } else if (password.equalsIgnoreCase("")) {
+                if(password.isEmpty()){
                     mUserPassword.setError("Enter a Password");
-                } else {
-                    mRetypePassword.setError("Password's Don't match");
+                }else if(userName.isEmpty()){
+                    mUserEmail.setError("Enter username");
+                }else if(repass.equals(password)){
+                    registerUser(mMacId,userName,password);
+                }else{
+                    mRetypePassword.setError("Passwords does not match");
                 }
 
 
@@ -93,6 +94,7 @@ public class Activity_Signup extends BaseActivity {
                                 Intent intent = new Intent(Activity_Signup.this, LoginActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
+                                finish();
                             }
                         }catch (Exception e){
                             e.printStackTrace();
