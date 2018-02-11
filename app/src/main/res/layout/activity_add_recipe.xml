@@ -65,32 +65,36 @@
             android:orientation="horizontal">
 
             <android.support.v7.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 app:cardCornerRadius="1dp"
+                android:padding="3dp"
                 android:layout_marginRight="8dp"
                 app:cardBackgroundColor="@color/colorPrimary">
 
                 <Spinner
                     android:id="@+id/add_recipe_categories_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:spinnerMode="dropdown" />
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 app:cardCornerRadius="1dp"
+                android:padding="3dp"
                 android:layout_marginLeft="8dp"
                 app:cardBackgroundColor="@color/colorPrimary">
 
                 <Spinner
                     android:id="@+id/add_recipe_cuisine_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:spinnerMode="dropdown" />
 

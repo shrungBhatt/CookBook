@@ -64,7 +64,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".AddRecipeActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:label="Add Recipe"/>
     </application>
 
 </manifest>
