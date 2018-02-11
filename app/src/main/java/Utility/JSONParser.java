@@ -1,8 +1,6 @@
 package Utility;
 
-import android.util.Log;
-
-import com.example.jigsaw.cookbook.RecipeData;
+import Model.RecipeData;
 
 import org.json.JSONArray;
 import org.json.JSONException;

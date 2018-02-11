@@ -22,6 +22,7 @@ import java.util.Map;
 
 import Adapters.RecipeRecyclerViewAdapter;
 import Model.BaseModel;
+import Model.RecipeData;
 import Utility.JSONParser;
 import Utility.MySharedPreferences;
 

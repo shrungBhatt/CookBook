@@ -12,6 +12,7 @@ import java.util.List;
 
 import Fragments.RecipeFragment;
 import Model.BaseModel;
+import Model.RecipeData;
 import Utility.JSONParser;
 import Utility.MySharedPreferences;
 

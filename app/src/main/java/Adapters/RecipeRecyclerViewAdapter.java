@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jigsaw.cookbook.R;
-import com.example.jigsaw.cookbook.RecipeData;
+import Model.RecipeData;
 import com.example.jigsaw.cookbook.RecipePagerActivity;
 import com.squareup.picasso.Picasso;
 

@@ -1,7 +1,6 @@
 package com.example.jigsaw.cookbook;
 
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import Model.BaseModel;
+import Model.RecipeData;
 import Utility.RoundedTransformation;
 import Utility.SimpleDividerItemDecoration;
 

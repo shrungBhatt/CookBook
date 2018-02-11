@@ -77,7 +77,7 @@ public class HomeScreen extends BaseActivity {
                 break;
 
             case R.id.favourite_recipes_button:
-                intent = new Intent(this,FavouriteRecipeActivity.class);
+                intent = new Intent(this,FavouriteRecipeActivityRealm.class);
                 startActivity(intent);
                 break;
         }
