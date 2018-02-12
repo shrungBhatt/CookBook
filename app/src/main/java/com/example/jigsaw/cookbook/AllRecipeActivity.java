@@ -78,14 +78,12 @@ public class AllRecipeActivity extends BaseActivity {
 
     private void fetchRecipes(final Context context, final String query) {
 
-        showProgressBar(context, TAG);
         //Building the request to be send to the server.
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/recipe.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        hideProgressBar();
                         try {
                             MySharedPreferences.setAllRecipeArrayJson(context, response);
                             //Parsing the JSON string that we received in the response of the request.
