@@ -46,12 +46,13 @@ public class LoginActivity extends BaseActivity {
 
         mActivity = this;
 
+        //To check whether the user is logged in or not.
         boolean status = MySharedPreferences.getStoredLoginStatus(LoginActivity.this);
         if (status) {
-            Intent i ;
+            Intent i;
             if (MySharedPreferences.isAdminLoggedOn(this)) {
-                i = new Intent(this,FeedBackActivity.class);
-            }else {
+                i = new Intent(this, FeedBackActivity.class);
+            } else {
                 i = new Intent(this, HomeScreen.class);
             }
             startActivity(i);
@@ -74,9 +75,9 @@ public class LoginActivity extends BaseActivity {
                     if (emailId.equals("admin")) {
                         macId = "00:00:00:00:00:00";
                         requestLogin(macId, emailId, pass);//Login request for admin
-                    }
-
-                    requestLogin(macId, emailId, pass);//Login request for the user.
+                    } else {
+                        requestLogin(macId, emailId, pass);
+                    }//Login request for the user.
                 } else {
                     mUserEmail.setError("Fill it up");
                     mUserPassword.setError("Fill it up");
@@ -99,7 +100,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void requestLogin(final String mac_id, final String userName, final String password) {
-        showProgressBar(this,TAG);
+        showProgressBar(this, TAG);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://ersnexus.esy.es/cook_book_login.php",
@@ -114,7 +115,7 @@ public class LoginActivity extends BaseActivity {
                                 MySharedPreferences.setStoredUsername(LoginActivity.this, userName);
                                 Intent i;
                                 if (userName.equals("admin")) {
-                                    MySharedPreferences.setIsAdminLoggedOn(LoginActivity.this,true);
+                                    MySharedPreferences.setIsAdminLoggedOn(LoginActivity.this, true);
                                     i = new Intent(LoginActivity.this, FeedBackActivity.class);
                                 } else {
                                     i = new Intent(LoginActivity.this, HomeScreen.class);
